@@ -57,17 +57,16 @@
         <!-- /.container -->
     </nav>
 
-    
-
-        <div class="registermodal-container">
-            <h1>Register An Account</h1><br>
-          <form>
-            <input type="text" name="user" placeholder="Username">
-            <input type="password" name="pass" placeholder="Password">
+    <div class="registermodal-container">
+        <h1>Register An Account</h1><br>
+          <form method="POST" action="welcome.php">
             <input type="text" name="email" placeholder="Email">
+            <input type="password" name="pass" placeholder="Password">
+            <input type="text" name="name" placeholder="Username">
+            <input type="text" name="phone" placeholder="Phone">
             <input type="submit" name="register" class="register registermodal-submit" value="Register">
           </form>
-        </div>
+    </div>
 
     <!-- jQuery -->
     <script src="js/jquery.js"></script>
