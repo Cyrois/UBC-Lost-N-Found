@@ -28,20 +28,20 @@ $mypassword = mysql_real_escape_string($mypassword);
 
     $searchUser = "select * from user where email='$email'";
 
-    $result=mysqli_query($searchUser);
+    $result=mysqli_query($conn, $searchUser);
 
 	// Mysql_num_row is counting table row
-	$count=mysql_num_rows($result);
+	$count=mysqli_num_rows($result);
 
 	//check if that email is already registered
-	if($count>0){
-		$insert = "insert into user values ('$email', '$pass', '$name', '$phone')";
+	if($count==0){
+		$insert = "insert into user (email, trust, phone, name, password) values ('$email', '0', '$phone', '$name', '$pass')";
 
 		if (mysqli_query($conn, $insert)) {
 			header('Location: homepage.html');
 			exit;		   
  		} else {
-		    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+		    echo mysqli_error($conn);
 		}
 
 		/*
