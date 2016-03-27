@@ -62,7 +62,57 @@
 
     <!-- Page Content -->
     <div class="container">
-
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="input-group" id="adv-search">
+                            <input type="text" class="form-control" placeholder="Search for items" />
+                            <div class="input-group-btn">
+                                <div class="btn-group" role="group">
+                                    <div class="dropdown dropdown-lg">
+                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
+                                        <div class="dropdown-menu dropdown-menu-right" role="menu">
+                                            <form class="form-horizontal" role="form">
+                                              <div class="form-group">
+                                                <label for="filter">Status</label>
+                                                <select class="form-control">
+                                                    <option value="0" selected>All Items</option>
+                                                    <option value="1">Found</option>
+                                                    <option value="2">Lost</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="contain">Location</label>
+                                                <input class="form-control" type="text" />
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="contain">Type</label>
+                                                <input class="form-control" type="text" />
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="contain">Title</label>
+                                                <input class="form-control" type="text" />
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="contain">Description</label>
+                                                <input class="form-control" type="text" />
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="contain">User</label>
+                                                <input class="form-control" type="text" />
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="contain">Date</label>
+                                                <input class="form-control" type="text" />
+                                            </div>
+                                            <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                                        </form>
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
         <div class="row">
             <div class="col-md-9">
 
@@ -73,9 +123,6 @@
                             ini_set('display_errors', 'On');
                             error_reporting(E_ALL | E_STRICT);
 
-                            $name = $_POST["name"];
-                            $email = $_POST["email"];
-
                             $conn = mysqli_connect("localhost", "root", "hotmail33");
 
                             if(mysqli_connect_errno()) 
@@ -83,20 +130,20 @@
                                 echo "failed to connect" . mysqli_connect_error();
                             }
 
-                            mysqli_select_db($conn,"test_db");
+                            mysqli_select_db($conn,"lostnfound");
 
-                            $result = mysqli_query($conn,"select * from states");
+                            $result = mysqli_query($conn,"select * from item");
 
                             while($row = mysqli_fetch_array($result))
                             {
                                 echo "<div class=\"thumbnail\">";
                                 echo "<div class=\"caption\">";
-                                echo "<h4 class=\"pull-right\">" .$row['state']. "</h4>";
-                                echo "<p>" .$row['population']. "</p>";
+                                echo "<h4 class=\"pull-right\"></h4>";
+                                echo "<p>" .$row['description']. "</p>";
                                 echo "</div>";
                                 echo "<div class=\"ratings\">";
-                                echo "<p class=\"pull-right\">Type</p>";
-                                echo "<span>Date</span>";
+                                echo "<p class=\"pull-right\">".$row['type']."</p>";
+                                echo "<span>" .$row['date']. "</span>";
                                 echo "</div>";
                                 echo "</div>";
                             }

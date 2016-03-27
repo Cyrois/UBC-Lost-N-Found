@@ -38,7 +38,9 @@ $mypassword = mysql_real_escape_string($mypassword);
 		$insert = "insert into user (email, trust, phone, name, password) values ('$email', '0', '$phone', '$name', '$pass')";
 
 		if (mysqli_query($conn, $insert)) {
-			header('Location: homepage.html');
+			session_start();
+			$_SESSION["name"] = $name;
+			header('Location: homepage.php');
 			exit;		   
  		} else {
 		    echo mysqli_error($conn);
