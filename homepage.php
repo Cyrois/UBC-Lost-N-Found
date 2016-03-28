@@ -44,51 +44,10 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="input-group" id="adv-search">
-                                <input type="text" class="form-control" placeholder="Search for items" />
-                                <div class="input-group-btn">
-                                    <div class="btn-group" role="group">
-                                        <div class="dropdown dropdown-lg">
-                                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
-                                            <div class="dropdown-menu dropdown-menu-right" role="menu">
-                                                <form class="form-horizontal" role="form" action="search.php" method="post">
-                                                  <div class="form-group">
-                                                    <label for="filter">Status</label>
-                                                    <select class="form-control">
-                                                        <option value="0" selected>All Items</option>
-                                                        <option value="1">Found</option>
-                                                        <option value="2">Lost</option>
-                                                    </select>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="contain">Location</label>
-                                                    <input class="form-control" type="text" />
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="contain">Type</label>
-                                                    <input class="form-control" type="text" />
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="contain">Title</label>
-                                                    <input class="form-control" type="text" />
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="contain">Description</label>
-                                                    <input class="form-control" type="text" />
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="contain">User</label>
-                                                    <input class="form-control" type="text" />
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="contain">Date</label>
-                                                    <input class="form-control" type="text" />
-                                                </div>
-                                                <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
-                                            </form>
-                                        </div>
-                                    </div>
-                                    <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
-                                </div>
+                                <form method="post" action="search.php">
+                                    <input type="text" class="form-control" name="description" placeholder="Search for an item">
+                                    <input type="submit" name="search" class="btn btn-primary" value="Search">
+                                </form>
                             </div>
                         </div>
                     </div>

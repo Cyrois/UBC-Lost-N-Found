@@ -29,7 +29,7 @@
     	if($count==1){
             $row = mysqli_fetch_array($result);
     		$_SESSION['name'] = $row['name'];
-            header('Location: homepage.html');
+            header('Location: homepage.php');
             exit;
     	}
     	else {
