@@ -17,9 +17,6 @@
     <!-- Custom CSS -->
     <link href="css/shop-homepage.css" rel="stylesheet">
 
-    <!-- Custom JS -->
-    <link href="js/shop-homepage.js" rel="stylesheet">
-
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -83,36 +80,76 @@
 
         <!-- Page Content -->
         <div class="container">
-
+            <!--current user-->
             <div class="row">
+                <div class="registermodal-container">
+                    <h1>Update your account</h1><br>
+                    
+                    <form action="cascade_delete.php" method="post">
+                      <select name="itemtype" id="itemtype">
+                        <?php
+                        ini_set('display_errors', 'On');
+                        error_reporting(E_ALL | E_STRICT);
 
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <form method="post" action="search.php">
-                                <input type="text" class="form-control" name="description" placeholder="Search for an item">
-                                <input type="submit" name="search" class="btn btn-primary" value="Search">
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-              <div class="modal-dialog">
-                <div class="createmodal-container">
-                    <h1>Post a Listing</h1><br>
-                    <form>
-                        <input type="text" name="name" placeholder="Name">
-                        <input type="text" name="description" placeholder="Description">
-                        <input type="text" name="location" placeholder="Location">
-                        <input type="text" name="type" placeholder="Type">
-                        <input type="text" name="date" placeholder="Date">
-                        <input type="submit" name="create" class="create createmodal-submit" value="Post">
-                    </form>
-                </div>
+                        $conn = mysqli_connect("localhost", "root", "hotmail33");
+
+                        if(mysqli_connect_errno()) 
+                        {
+                            echo "failed to connect" . mysqli_connect_error();
+                        }
+
+                        mysqli_select_db($conn,"lostnfound");
+                        $sql = "select * from itemtype";
+                        $result = mysqli_query($conn, $sql);
+
+                        while($row = mysqli_fetch_array($result))
+                        {
+                            echo "<option value=\"" .$row['type']. "\">" .$row['type']. "</option>";
+                        }
+                        mysqli_close($conn);
+                        ?>
+                    </select>
+                    <input type="submit" name="cascadeDelete" class="btn btn-primary" value="Cascade Delete">
+                </form>
             </div>
         </div>
+
+        <!--all users-->
+        <div class="row">
+
+            <div class="col-sm-4 col-lg-4 col-md-4">
+                <?php
+                ini_set('display_errors', 'On');
+                error_reporting(E_ALL | E_STRICT);
+
+                $conn = mysqli_connect("localhost", "root", "hotmail33");
+
+                if(mysqli_connect_errno()) 
+                {
+                    echo "failed to connect" . mysqli_connect_error();
+                }
+
+                mysqli_select_db($conn,"lostnfound");
+                $sql = "select * from item order by type";
+                $result = mysqli_query($conn, $sql);
+
+                while($row = mysqli_fetch_array($result))
+                {
+                    echo "<div class=\"thumbnail\">";
+                    echo "<div class=\"caption\">";
+                    echo "<p>Description: " .$row['description']. "</p>";
+                    echo "<p>Type: " .$row['type']. "</p>";
+                    echo "</div>";
+                    echo "</div>";
+                }
+                mysqli_close($conn);
+                ?>
+
+            </div>
+
+        </div>
     </div>
+</div>
 </div>
 
 </div>

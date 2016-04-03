@@ -116,9 +116,6 @@
 
                             mysqli_close($conn);
                             ?>
-                            <div class="thumbnail">
-
-                            </div>
 
                         </div>
 
