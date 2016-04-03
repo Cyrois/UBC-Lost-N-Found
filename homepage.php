@@ -38,9 +38,6 @@
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                         <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
                     </button>
                     <a class="navbar-brand" href="#">UBC Lost & Found</a>
                 </div>
@@ -48,8 +45,28 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
                         <li>
+                            <form method="post" action=".php">
+                                <input type="submit" name="profile" class="btn btn-primary" value="Join">
+                            </form>
+                        </li>
+                        <li>
+                            <form method="post" action=".php">
+                                <input type="submit" name="division" class="btn btn-primary" value="Division">
+                            </form>
+                        </li>
+                        <li>
+                            <form method="post" action=".php">
+                                <input type="submit" name="aggregation" class="btn btn-primary" value="Aggregation">
+                            </form>
+                        </li>
+                        <li>
                             <form method="post" action="profile.php">
-                                <input type="submit" name="profile" class="btn btn-primary" value="Profile">
+                                <input type="submit" name="profile" class="btn btn-primary" value="Update">
+                            </form>
+                        </li>
+                        <li>
+                            <form method="post" action=".php">
+                                <input type="submit" name="delete" class="btn btn-primary" value="Delete">
                             </form>
                         </li>
                     </ul>
