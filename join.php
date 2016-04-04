@@ -83,33 +83,35 @@
 
         <!-- Page Content -->
         <div class="container">
-
+            <!--all users-->
             <div class="row">
+                <?php
+                ini_set('display_errors', 'On');
+                error_reporting(E_ALL | E_STRICT);
 
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <form method="post" action="search.php">
-                                <input type="text" class="form-control" name="description" placeholder="Search for an item">
-                                <input type="submit" name="search" class="btn btn-primary" value="Search">
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-              <div class="modal-dialog">
-                <div class="createmodal-container">
-                    <h1>Post a Listing</h1><br>
-                    <form>
-                        <input type="text" name="name" placeholder="Name">
-                        <input type="text" name="description" placeholder="Description">
-                        <input type="text" name="location" placeholder="Location">
-                        <input type="text" name="type" placeholder="Type">
-                        <input type="text" name="date" placeholder="Date">
-                        <input type="submit" name="create" class="create createmodal-submit" value="Post">
-                    </form>
-                </div>
+                $conn = mysqli_connect("localhost", "root", "hotmail33");
+
+                if(mysqli_connect_errno()) 
+                {
+                    echo "failed to connect" . mysqli_connect_error();
+                }
+
+                mysqli_select_db($conn,"lostnfound");
+                $sql = "select U.email, I.type from user U, item I, lost L where U.email = L.email AND L.item_id = I.id;";
+                $result = mysqli_query($conn, $sql);
+
+                while($row = mysqli_fetch_array($result))
+                {
+                    echo "<div class=\"thumbnail\">";
+                    echo "<div class=\"caption\">";
+                    echo "<p>Email: " .$row['email']. "</p>";
+                    echo "<p>Type: " .$row['type']. "</p>";
+                    echo "</div>";
+                    echo "</div>";
+                }
+
+                mysqli_close($conn);
+                ?>
             </div>
         </div>
     </div>
