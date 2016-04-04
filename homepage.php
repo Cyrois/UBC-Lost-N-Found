@@ -106,6 +106,11 @@
                         <div class="col-md-12">
                             <form method="post" action="search.php">
                                 <input type="text" class="form-control" name="description" placeholder="Search for an item">
+                                <select name="attributes" id="attributes">
+                                    <option value="*">All</option>"
+                                    <option value="description">Description</option>"
+                                    <option value="type">Type</option>"
+                                </select>
                                 <input type="submit" name="search" class="btn btn-primary" value="Search">
                             </form>
                         </div>

@@ -83,7 +83,7 @@
             <!--current user-->
             <div class="row">
                 <div class="registermodal-container">
-                    <h1>Update your account</h1><br>
+                    <h1>Delete An Itemtype</h1><br>
                     
                     <form action="cascade_delete.php" method="post">
                       <select name="itemtype" id="itemtype">

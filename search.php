@@ -41,21 +41,9 @@
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                         <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
                     </button>
                     <a class="navbar-brand" href="#">UBC Lost & Found</a>
                 </div>
-                <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a style="cursor: pointer" data-toggle="modal" data-target="#post-modal">Post</a></li>
-                        <li><a style="cursor: pointer" data-toggle="modal" data-target="#login-modal">Login</a></li>
-                        <li><a style="cursor: pointer" data-toggle="modal" data-target="#register-modal">Register</a></li>
-                    </ul>
-                </div>
-                <!-- /.navbar-collapse -->
             </div>
             <!-- /.container -->
         </nav>
@@ -70,6 +58,11 @@
                             <div class="input-group" id="adv-search">
                                 <form method="post" action="search.php">
                                     <input type="text" class="form-control" name="description" placeholder="Search for an item">
+                                    <select name="attributes" id="attributes">
+                                        <option value="*">All</option>"
+                                        <option value="description">Description</option>"
+                                        <option value="type">Type</option>"
+                                    </select>
                                     <input type="submit" name="search" class="btn btn-primary" value="Search">
                                 </form>
                             </div>
@@ -96,7 +89,8 @@
 
                             mysqli_select_db($conn,"lostnfound");
                             $description = $_POST['description'];
-                            $sql = "select * from item where description LIKE '%" .$description. "%';";
+                            $attributes = $_POST['attributes'];
+                            $sql = "select $attributes from item where description LIKE '%" .$description. "%';";
                             echo $sql;
                             $result = mysqli_query($conn, $sql);
 
@@ -105,11 +99,13 @@
                                 echo "<div class=\"thumbnail\">";
                                 echo "<div class=\"caption\">";
                                 echo "<h4 class=\"pull-right\"></h4>";
-                                echo "<p>" .$row['description']. "</p>";
-                                echo "</div>";
+                                if($attributes != "type") {
+                                    echo "<p>" .$row['description']. "</p>";    
+                                }
                                 echo "<div class=\"ratings\">";
-                                echo "<p class=\"pull-right\">".$row['type']."</p>";
-                                echo "<span>" .$row['date']. "</span>";
+                                if($attributes != "description") {
+                                    echo "<p class=\"pull-right\">".$row['type']."</p>";   
+                                }
                                 echo "</div>";
                                 echo "</div>";
                             }
