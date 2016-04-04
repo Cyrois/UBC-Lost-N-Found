@@ -1,3 +1,7 @@
+
+CREATE database lostnfound;
+USE lostnfound;
+
 CREATE TABLE user(
 	email char(254) NOT NULL,
 	Primary key(email),
@@ -7,10 +11,15 @@ CREATE TABLE user(
 	password char(8));
 	
 create table useradmin (
-	user char(254) not null,
+	email char(254) not null,
 	privileges char(10),
-	primary key (user),
-	foreign key (user) references user(email));
+	primary key (email),
+	
+	constraint 
+	foreign key (email) 
+	references user(email)
+	on delete cascade
+);
 
 create table location (
 	address char(50),
@@ -29,7 +38,7 @@ create table item (
 	description varchar(500),
 	type char(20),
 	primary key(id),
-	
+
 	constraint 
 	foreign key (type) 
 	references itemtype(type)
@@ -42,26 +51,50 @@ create table reward (
     
 
 create table lost (
-	id int not null,
+	item_id int,
 	date long,
 	location char(50),
-	reward int,
-	user char(254) not null,
-	primary key (id),
+	reward_id int,
+	email char(254),
+	primary key (item_id, email),
 	foreign key (location) references location(address),
-	foreign key (user) references user(email),
-	foreign key (reward) references reward(id),
-	foreign key (id) references item(id));
+	
+	constraint 
+	foreign key (email) 
+	references user(email)
+	on delete cascade,
+
+	constraint 
+	foreign key (reward_id) 
+	references reward(id)
+	on delete cascade,
+	
+	constraint 
+	foreign key (item_id) 
+	references item(id)
+	on delete cascade
+);
 
 create table found (
-	id int not null,
+	item_id int,
 	date long,
 	location char(50),
-	user char(254),
-	primary key (id),
-	foreign key (user) references user(email),
+	email char(254),
+	primary key(item_id, email),
 	foreign key (location) references location(address),
-	foreign key (id) references item(id));
+	
+	constraint 
+	foreign key (email) 
+	references user(email)
+	on delete cascade,
+
+	constraint 
+	foreign key (item_id) 
+	references item(id)
+	on delete cascade
+);
+
+
     
 /*Initial Database Insertions*/	
 	
@@ -130,6 +163,33 @@ Values('6', 'purple', 'wire stripper');
 Insert into item(id, description, type)
 Values('7', 'pink', 'motor toothbrush');
 
+Insert into item(id, description, type)
+Values('8', 'Harry Potter', 'book');
+
+
+/*For division query mick found all items*/
+Insert into item(id, description, type)
+Values('9', 'Money', 'wallet');
+
+Insert into item(id, description, type)
+Values('10', 'Big, Thick, Long, Black', 'duffle bag');
+
+Insert into item(id, description, type)
+Values('11', 'Big, Black', 'backpack');
+
+Insert into item(id, description, type)
+Values('12', 'Long, Thin, Black', 'cellphone');
+
+Insert into item(id, description, type)
+Values('13', 'purple', 'wire stripper');
+
+Insert into item(id, description, type)
+Values('14', 'pink', 'motor toothbrush');
+
+Insert into item(id, description, type)
+Values('15', 'Harry Potter', 'book');
+
+
 
 /*Reward insertions*/
 Insert into reward(id, description)
@@ -160,39 +220,67 @@ Values('Main Mall', 'a9a9a9', 'west vancouver', 'bc', '24/7 construction');
 
 
 /*Lost insertions*/
-Insert into lost (id, date, location, reward, user)
+Insert into lost (item_id, date, location, reward_id, email)
 Values('1', '032716', 'Library Lane', '1', 'mick@sayson.com');
 
-Insert into lost (id, date, location, reward, user)
+Insert into lost (item_id, date, location, reward_id, email)
 Values('2', '032716', 'Mall Street', '4', 'nick@wong.com');
 
-Insert into lost (id, date, location, reward, user)
+Insert into lost (item_id, date, location, reward_id, email)
 Values('3', '032716', 'Hastings Street', '3', 'calvin@chan.com');
 
-Insert into lost (id, date, location, reward, user)
+Insert into lost (item_id, date, location, reward_id, email)
 Values('4', '032716', 'Main Mall', '1', 'chris@yu.com');
 
-Insert into lost (id, date, location, reward, user)
+Insert into lost (item_id, date, location, reward_id, email)
 Values('6', '032716', 'Hastings Street', '2', 'brendan@lau.com');
 
-Insert into lost (id, date, location, reward, user)
+Insert into lost (item_id, date, location, reward_id, email)
 Values('7', '032716', 'Hastings Street', '1', 'calvin@chan.com');
 
+
+
+
 /*Found insertions*/
-Insert into found (id, date, location, user)
+Insert into found (item_id, date, location, email)
 Values('4', '032716', 'Mall Street', 'mick@sayson.com');
 
-Insert into found (id, date, location, user)
+Insert into found (item_id, date, location, email)
 Values('3', '032716', 'Hastings Street', 'nick@wong.com');
 
-Insert into found (id, date, location, user)
+Insert into found (item_id, date, location, email)
 Values('1', '032716', 'Main Mall', 'nick@wong.com');
 
-Insert into found (id, date, location, user)
+Insert into found (item_id, date, location, email)
 Values('2', '032716', 'Hastings Street', 'daniel@chong.com');
 
-Insert into found (id, date, location, user)
+Insert into found (item_id, date, location, email)
 Values('5', '032716', 'Hastings Street', 'daniel@chong.com');
+
+Insert into found (item_id, date, location, email)
+Values('8', '032716', 'Library Lane', 'chris@yu.com');
+
+/*For division query; Mick has found all item types*/
+Insert into found (item_id, date, location, email)
+Values('9', '032716', 'Hastings Street', 'mick@sayson.com');
+
+Insert into found (item_id, date, location, email)
+Values('10', '032716', 'Hastings Street', 'mick@sayson.com');
+
+Insert into found (item_id, date, location, email)
+Values('11', '032716', 'Hastings Street', 'mick@sayson.com');
+
+Insert into found (item_id, date, location, email)
+Values('12', '032716', 'Hastings Street', 'mick@sayson.com');
+
+Insert into found (item_id, date, location, email)
+Values('13', '032716', 'Hastings Street', 'mick@sayson.com');
+
+Insert into found (item_id, date, location, email)
+Values('14', '032716', 'Hastings Street', 'mick@sayson.com');
+
+Insert into found (item_id, date, location, email)
+Values('15', '032716', 'Hastings Street', 'mick@sayson.com');
 
 
 SELECT * FROM user;
@@ -217,34 +305,94 @@ from user;
 
 
 -- nested aggregation with group by
+/*lists users that have the same trust with 
+at least one other user*/
 select email, trust
 from user
-where trust = (select max(trust) from user)
-group by name;
+where trust in (
+	select trust 
+	from user  
+    group by trust 
+    having count(*) > 1);
 
--- nested aggregation with group by
-select f.user, U.trust 
-from found f, user U
-where f.user = U.email
-group by user 
-having count(*) > 1
+/*same as above, but pairs the users side by side*/
+create view v as 
+select email, trust
+from user  
+where trust in (
+	select trust 
+	from user  
+    group by trust 
+    having count(*) > 1);
 
--- right outer join query
-/*matches users that found and lost an item*/
-select f.user as foundUser, l.user as lostUser
-from found f left outer join lost l
-on f.id = l.id; 
+select * 
+from v v1, v v2
+where v1.trust = v2.trust AND v1.email <> v2.email;
+	
+	
 
 -- left outer join query
 /*matches users that found and lost an item*/
-select f.user as foundUser, l.user as lostUser
+select f.email as foundUser, l.email as lostUser
+from found f left outer join lost l
+on f.item_id = l.item_id; 
+
+-- right outer join query
+/*matches users that found and lost an item*/
+select f.email as foundUser, l.email as lostUser
 from found f right outer join lost l
-on f.id = l.id; 
+on f.item_id = l.item_id; 
 
 
 -- inner join query
 /*matches users that found and lost an item*/
-select f.user as foundUser, l.user as lostUser
+select f.email as foundUser, l.email as lostUser
 from found f inner join lost l
-on f.id = l.id; 
+on f.item_id = l.item_id; 
+
+
+--division query
+
+create view c as
+select * 
+from item 
+group by type
+having count(*) > 1;
+
+create view b as
+select f.id, f.user, i.description, i.type
+from found f, item i
+where f.id = i.id;
+
+-- create view d as
+select type 
+from item 
+group by type
+having count(*) > 1;
+
+select * 
+from found f
+where item_id IN
+(select i.id as item_id 
+  from item i
+  where f.item_id=i.id and i.type IN (select *
+			from itemtype));
+
+select *
+from user U
+where not exists (select *
+		from item I, itemtype IT
+		where I.type = IT.type and not exists (select *
+				from found F
+				where F.item_id = I.id)); 
+
+select t.email, t.type from (select user.email, item.type  from user, found, item where found.email = user.email and found.item_id = item.id) as t;
+
+
+
+
+
+
+
+
 
