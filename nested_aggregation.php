@@ -60,7 +60,7 @@
                             </form>
                         </li>
                         <li>
-                            <form method="post" action=".php">
+                            <form method="post" action="nested_aggregation.php">
                                 <input type="submit" name="nestedAggregation" class="btn btn-primary" value="Nested Aggregation">
                             </form>
                         </li>
@@ -72,6 +72,21 @@
                         <li>
                             <form method="post" action="delete.php">
                                 <input type="submit" name="delete" class="btn btn-primary" value="Delete">
+                            </form>
+                        </li>
+                        <li>
+                            <form method="post" action="right_join.php">
+                                <input type="submit" name="rightJoin" class="btn btn-primary" value="Right Join">
+                            </form>
+                        </li>
+                        <li>
+                            <form method="post" action="inner_join.php">
+                                <input type="submit" name="innerJoin" class="btn btn-primary" value="Inner Join">
+                            </form>
+                        </li>
+                        <li>
+                            <form method="post" action="left_join.php">
+                                <input type="submit" name="leftJoin" class="btn btn-primary" value="Left Join">
                             </form>
                         </li>
                     </ul>

@@ -42,8 +42,48 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
                         <li>
+                            <form method="post" action="join.php">
+                                <input type="submit" name="profile" class="btn btn-primary" value="Join">
+                            </form>
+                        </li>
+                        <li>
+                            <form method="post" action=".php">
+                                <input type="submit" name="division" class="btn btn-primary" value="Division">
+                            </form>
+                        </li>
+                        <li>
+                            <form method="post" action="aggregation.php">
+                                <input type="submit" name="aggregation" class="btn btn-primary" value="Aggregation">
+                            </form>
+                        </li>
+                        <li>
+                            <form method="post" action="nested_aggregation.php">
+                                <input type="submit" name="nestedAggregation" class="btn btn-primary" value="Nested Aggregation">
+                            </form>
+                        </li>
+                        <li>
                             <form method="post" action="profile.php">
-                                <input type="submit" name="profile" class="btn btn-primary" value="Profile">
+                                <input type="submit" name="profile" class="btn btn-primary" value="Update">
+                            </form>
+                        </li>
+                        <li>
+                            <form method="post" action="delete.php">
+                                <input type="submit" name="delete" class="btn btn-primary" value="Delete">
+                            </form>
+                        </li>
+                        <li>
+                            <form method="post" action="right_join.php">
+                                <input type="submit" name="rightJoin" class="btn btn-primary" value="Right Join">
+                            </form>
+                        </li>
+                        <li>
+                            <form method="post" action="inner_join.php">
+                                <input type="submit" name="innerJoin" class="btn btn-primary" value="Inner Join">
+                            </form>
+                        </li>
+                        <li>
+                            <form method="post" action="left_join.php">
+                                <input type="submit" name="leftJoin" class="btn btn-primary" value="Left Join">
                             </form>
                         </li>
                     </ul>
